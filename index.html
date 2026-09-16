@@ -3,92 +3,585 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minha Primeira Página</title>
+    <title>Litoral de Natal — O dia acaba em laranja sobre as dunas</title>
+    
+    <!-- Google Fonts para estilo editorial moderno -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,400&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
     <style>
+        :root {
+            --bg-sand: #fbf7ee;
+            --bg-sand-card: #f4edd8;
+            --text-dark: #232220;
+            --text-muted: #5e5952;
+            --accent-orange: #d9622d;
+            --accent-sunset: linear-gradient(135deg, #1b263b 0%, #3d2342 35%, #9e3d36 65%, #f27f44 88%, #f8c278 100%);
+            --navy-dark: #12161f;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: Arial, Helvetica, sans-serif;
         }
 
         body {
-            background-color: #f4f4f9;
-            color: #333;
+            background-color: var(--bg-sand);
+            color: var(--text-dark);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 16px;
             line-height: 1.6;
-            padding: 20px;
+            overflow-x: hidden;
         }
 
-        header {
-            background-color: #2c3e50;
-            color: white;
-            padding: 2rem;
-            text-align: center;
-            border-radius: 8px;
+        /* Tipografia de destaque */
+        h1, h2, h3, .serif-font {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-weight: 400;
         }
 
-        main {
-            max-width: 800px;
-            margin: 20px auto;
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        /* --- Barra de Navegação Superior Fixa --- */
+        .site-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background-color: #1a1e27;
+            padding: 18px 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
 
-        h2 {
-            color: #2c3e50;
+        .site-logo {
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 1.05rem;
+            letter-spacing: -0.2px;
+            text-decoration: none;
+        }
+
+        .site-menu {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+        }
+
+        .site-menu a {
+            color: #b0b4be;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+        }
+
+        .site-menu a:hover {
+            color: #ffffff;
+        }
+
+        /* --- Seção Hero --- */
+        .hero {
+            position: relative;
+            background: var(--accent-sunset);
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+            padding: 120px 5% 80px;
+            color: #ffffff;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .hero-title {
+            font-size: clamp(2.8rem, 6.5vw, 5.2rem);
+            line-height: 1.05;
+            max-width: 820px;
+            margin-bottom: 28px;
+            letter-spacing: -0.5px;
+        }
+
+        .hero-title em {
+            font-style: italic;
+            font-weight: 400;
+        }
+
+        .hero-subtitle {
+            font-size: 1.15rem;
+            line-height: 1.55;
+            max-width: 520px;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 300;
+        }
+
+        .hero-indicator {
+            position: absolute;
+            right: 5%;
+            bottom: 35px;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* --- Introdução com Estatísticas --- */
+        .intro-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 90px 5% 60px;
+        }
+
+        .intro-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: flex-start;
+            margin-bottom: 60px;
+        }
+
+        .intro-heading {
+            font-size: clamp(2.2rem, 3.5vw, 3rem);
+            line-height: 1.15;
+            color: var(--text-dark);
+        }
+
+        .intro-text {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            border-top: 1px solid rgba(0, 0, 0, 0.08);
+            padding-top: 40px;
+        }
+
+        .stat-item .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 4vw, 3.4rem);
+            color: var(--accent-orange);
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .stat-item .stat-label {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--text-muted);
+        }
+
+        /* --- Seção de Praias (Layout Editorial Alternado) --- */
+        .beach-stories {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 5% 90px;
+        }
+
+        .story-row {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 60px;
+            align-items: center;
+            margin-bottom: 110px;
+        }
+
+        .story-row.reversed {
+            grid-template-columns: 0.9fr 1.1fr;
+        }
+
+        .story-image-wrap {
+            position: relative;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.08);
+        }
+
+        .story-image-wrap img {
+            width: 100%;
+            height: 480px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.6s ease;
+        }
+
+        .story-image-wrap:hover img {
+            transform: scale(1.03);
+        }
+
+        .image-tag {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background-color: var(--navy-dark);
+            color: #ffffff;
+            font-size: 0.78rem;
+            padding: 6px 14px;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+        }
+
+        .story-meta {
+            font-size: 0.85rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--accent-orange);
+            margin-bottom: 12px;
+            display: block;
+            font-weight: 500;
+        }
+
+        .story-title {
+            font-size: clamp(2rem, 3.2vw, 2.7rem);
+            line-height: 1.15;
+            margin-bottom: 20px;
+        }
+
+        .story-desc {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+
+        .highlight-box {
+            font-size: 0.92rem;
+            background-color: rgba(217, 98, 45, 0.08);
+            border-left: 2px solid var(--accent-orange);
+            padding: 14px 18px;
+            color: var(--text-dark);
+        }
+
+        .highlight-box strong {
+            color: var(--accent-orange);
+        }
+
+        /* --- Seção Dark / Galeria --- */
+        .dark-gallery {
+            background-color: var(--navy-dark);
+            color: #ffffff;
+            padding: 90px 5%;
+        }
+
+        .dark-gallery-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .dark-gallery-header {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 60px;
+            align-items: center;
+        }
+
+        .dark-gallery-title {
+            font-size: clamp(2rem, 3.4vw, 2.8rem);
+            line-height: 1.2;
+        }
+
+        .dark-gallery-sub {
+            color: #a4abb8;
+            font-size: 1.02rem;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .gallery-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .gallery-item-image {
+            height: 240px;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 14px;
+        }
+
+        .gallery-item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover .gallery-item-image img {
+            transform: scale(1.05);
+        }
+
+        .gallery-item span {
+            font-size: 0.88rem;
+            color: #b0b5c0;
+        }
+
+        /* --- Seção de Dicas (Cards Amarelados) --- */
+        .tips-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 5%;
+        }
+
+        .tips-title {
+            font-size: clamp(2rem, 3.2vw, 2.8rem);
             margin-bottom: 10px;
         }
 
-        button {
-            background-color: #3498db;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 16px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 15px;
+        .tips-sub {
+            color: var(--text-muted);
+            margin-bottom: 45px;
+            font-size: 1.05rem;
         }
 
-        button:hover {
-            background-color: #2980b9;
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
         }
 
-        footer {
-            text-align: center;
-            margin-top: 30px;
-            font-size: 0.9em;
-            color: #777;
+        .tip-card {
+            background-color: var(--bg-sand-card);
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            padding: 36px 30px;
+            border-radius: 4px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        .tip-card h3 {
+            font-family: 'DM Sans', sans-serif;
+            font-weight: 600;
+            font-size: 1.15rem;
+            margin-bottom: 14px;
+            color: var(--text-dark);
+        }
+
+        .tip-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.65;
+        }
+
+        /* --- Footer --- */
+        .site-footer {
+            background-color: var(--navy-dark);
+            color: #8c93a0;
+            padding: 30px 5%;
+            font-size: 0.85rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .site-footer strong {
+            color: #ffffff;
+        }
+
+        /* Responsividade */
+        @media (max-width: 900px) {
+            .intro-grid, .dark-gallery-header {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .story-row, .story-row.reversed {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                margin-bottom: 70px;
+            }
+
+            .story-row.reversed .story-content {
+                order: 2;
+            }
+
+            .story-row.reversed .story-image-wrap {
+                order: 1;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .tips-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>Natan Paulo</h1>
-        <p>Um exemplo básico de página HTML5.</p>
+    <!-- Navegação -->
+    <nav class="site-nav">
+        <a href="#" class="site-logo">Natan Paulo - Atividade:Litoral de Natal</a>
+        <ul class="site-menu">
+            <li><a href="#praias">As praias</a></li>
+            <li><a href="#galeria">Galeria</a></li>
+            <li><a href="#planejar">Planejar</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero com degradê pôr do sol -->
+    <header class="hero">
+        <div class="hero-container">
+            <h1 class="hero-title">O dia acaba em <em>laranja sobre as dunas</em></h1>
+            <p class="hero-subtitle">De Ponta Negra a Genipabu, um roteiro pelas praias que fazem de Natal um dos litorais mais fotografados do Nordeste — na hora exata em que o céu pega fogo.</p>
+        </div>
+        <span class="hero-indicator">ROLE ↓</span>
     </header>
 
-    <main>
-        <section>
-            <h2>Sobre este projeto</h2>
-            <p>Este é um modelo inicial que você pode editar para criar seu próprio site, portfólio ou blog.</p>
-            
-            <button onclick="mostrarMensagem()">Clique aqui</button>
-        </section>
+    <!-- Estatísticas e Introdução -->
+    <section class="intro-section">
+        <div class="intro-grid">
+            <h2 class="intro-heading">Natal tem praia para cada hora do dia — e um horário de ouro para todas elas</h2>
+            <p class="intro-text">A cidade fica na ponta mais oriental das Américas, o que dá um efeito curioso: o sol nasce e se põe quase direto no mar, sem pressa. À tarde, entre 17h e 18h, a luz vira o protagonista de qualquer passeio pela orla — e é esse horário que guia este roteiro pelas seis praias mais procuradas da região.</p>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-number">6</div>
+                <div class="stat-label">praias no roteiro</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">25km</div>
+                <div class="stat-label">de orla urbana</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">17h30</div>
+                <div class="stat-label">horário de ouro médio</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Conteúdo Editorial das Praias -->
+    <main class="beach-stories" id="praias">
+
+        <!-- 01: Ponta Negra -->
+        <article class="story-row">
+            <div class="story-image-wrap">
+                <img src="Praia-da-Ponta-Negra.webp" alt="Praia de Ponta Negra com o Morro do Careca ao fundo em fim de tarde">
+                <span class="image-tag">Ponta Negra · Zona Sul</span>
+            </div>
+            <div class="story-content">
+                <span class="story-meta">01 — A mais famosa</span>
+                <h2 class="story-title">Ponta Negra e o Morro do Careca</h2>
+                <p class="story-desc">A duna de 120 metros que avança sobre o mar é o cartão-postal de Natal e o melhor mirante natural para o pôr do sol. Ao fim da tarde, barracas acendem luzes de LED e a areia clara reflete o céu em tons de rosa e laranja.</p>
+                <div class="highlight-box">
+                    <strong>Melhor ponto:</strong> a faixa de areia em frente à Rua Aristides Porpino, olhando para o morro — o sol se põe quase atrás dele.
+                </div>
+            </div>
+        </article>
+
+        <!-- 02: Genipabu -->
+        <article class="story-row reversed">
+            <div class="story-content">
+                <span class="story-meta">02 — Deserto à beira-mar</span>
+                <h2 class="story-title">Dunas de Genipabu</h2>
+                <p class="story-desc">A cerca de 25 minutos do centro, um mar de dunas douradas se encontra com o oceano. É onde o passeio de buggy vira ritual: subir e descer as dunas até parar num alto, bem na hora em que o sol começa a tingir a areia de cobre.</p>
+                <div class="highlight-box">
+                    <strong>Melhor ponto:</strong> o topo da duna principal, de frente para a Lagoa de Genipabu — o reflexo dobra a cor do céu.
+                </div>
+            </div>
+            <div class="story-content story-image-wrap">
+                <img src="conheca-genipabu-guia-completo-blog-cvc-2.jpg" alt="Dunas de Genipabu ao entardecer com passeio de buggy">
+                <span class="image-tag">Genipabu · Extremoz</span>
+            </div>
+        </article>
+
+        <!-- 03: Praia do Meio e dos Artistas -->
+        <article class="story-row">
+            <div class="story-image-wrap">
+                <img src="praia-do-meio-natal.jpg" alt="Orla da Praia do Meio e Praia dos Artistas em Natal">
+                <span class="image-tag">Praia do Meio & dos Artistas · Centro Histórico</span>
+            </div>
+            <div class="story-content">
+                <span class="story-meta">03 — História e maré</span>
+                <h2 class="story-title">Praia do Meio e Praia dos Artistas</h2>
+                <p class="story-desc">Coladas uma na outra, essas praias urbanas ficam entre o Forte dos Reis Magos e a Via Costeira. A maré baixa forma piscinas naturais perfeitas para crianças, e o calçadão vira ponto de caminhada logo antes do sol descer atrás dos prédios da cidade alta.</p>
+                <div class="highlight-box">
+                    <strong>Melhor ponto:</strong> o mirante próximo ao forte, com vista para a foz do Rio Potengi se abrindo em dourado.
+                </div>
+            </div>
+        </article>
+
     </main>
 
-    <footer>
-        <p>&copy; 2026 - Desenvolvido por Você</p>
-    </footer>
+    <!-- Galeria Dark (Fundo Escuro) -->
+    <section class="dark-gallery" id="galeria">
+        <div class="dark-gallery-inner">
+            <div class="dark-gallery-header">
+                <h2 class="dark-gallery-title serif-font">Um mesmo céu, seis paisagens diferentes</h2>
+                <p class="dark-gallery-sub">Da orla urbana às dunas selvagens, o litoral de Natal muda de personagem a cada poucos quilômetros — mas o horário do espetáculo é sempre o mesmo.</p>
+            </div>
 
-    <script>
-        function mostrarMensagem() {
-            alert("Olá! O JavaScript está funcionando perfeitamente.");
-        }
-    </script>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <div class="gallery-item-image">
+                        <img src="https://images.unsplash.com/photo-1590523741831-ab7e8b8f9c7f?auto=format&fit=crop&w=600&q=80" alt="Ponta Negra, fim de tarde">
+                    </div>
+                    <span>Ponta Negra, fim de tarde</span>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-item-image">
+                        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80" alt="Genipabu, hora dourada">
+                    </div>
+                    <span>Genipabu, hora dourada</span>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-item-image">
+                        <img src="download (2).jpeg" alt="Morro do Careca">
+                    </div>
+                    <span>Morro do Careca</span>
+                </div>
+                <div class="gallery-item">
+                    <div class="gallery-item-image">
+                        <img src="https://images.unsplash.com/photo-1514565131-fce0801e5785?auto=format&fit=crop&w=600&q=80" alt="Orla urbana, começo da noite">
+                    </div>
+                    <span>Orla urbana, começo da noite</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Dicas para o Pôr do Sol -->
+    <section class="tips-section" id="planejar">
+        <h2 class="tips-title serif-font">Para pegar o pôr do sol certo</h2>
+        <p class="tips-sub">Poucos ajustes de horário e transporte fazem toda a diferença entre ver "um" pôr do sol e ver "o" pôr do sol de Natal.</p>
+
+        <div class="tips-grid">
+            <div class="tip-card">
+                <h3>Chegue uma hora antes</h3>
+                <p>A luz mais bonita costuma vir 40 a 60 minutos antes do sol tocar o horizonte — chegar cedo garante lugar de frente para o Morro do Careca ou para as dunas.</p>
+            </div>
+            <div class="tip-card">
+                <h3>Zona sul x zona norte</h3>
+                <p>Ponta Negra e a Via Costeira ficam ao sul; Genipabu, ao norte, do outro lado do Rio Potengi. São passeios separados — não dá para emendar os dois no mesmo fim de tarde.</p>
+            </div>
+            <div class="tip-card">
+                <h3>Maré também importa</h3>
+                <p>Na Praia do Meio e dos Artistas, consulte a tábua de marés: com maré baixa, as piscinas naturais aparecem e o reflexo do céu no chão de areia dobra o efeito do pôr do sol.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer class="site-footer">
+        <strong>Litoral de Natal</strong>
+        <span>Roteiro editorial sobre as praias de Natal/RN — Imagens ilustrativas do litoral potiguar.</span>
+    </footer>
 
 </body>
 </html>
